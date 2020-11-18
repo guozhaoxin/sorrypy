@@ -1,0 +1,13 @@
+version: '3'
+services:
+  sorry:
+    image: sorry
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - /usr/share/fonts:/usr/share/fonts
+    container_name: sorry
+    environment:
+      - PYTHONPATH:/home/code/sorrypy
+    working_dir: /home/code/sorrypy
