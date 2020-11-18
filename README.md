@@ -8,8 +8,11 @@
 亮点是可以换自己的梗生成gif。
 可惜部署环境是ubuntu+ruby，我就重制了个全平台的python重置版博大家一笑。
 荣誉首先属于[xtyxtyx](https://github.com/xtyxtyx/)
-
 __[Hardy兄弟](https://github.com/q809198545)的[NodeJs版:node-sorry](https://github.com/q809198545/node-sorry)也非常好用，有[DEMO](http://119.23.239.110:3000/sorry/)为证，嘎嘎。__
+以上为原版的内容，我这里第一是将ffmpeg干掉了，用户自己在自己环境中安装，无论是Windows还是linux，以减小
+整个工程的大小；第二是增加docke的相关文件，方便dockers部署，不过由于ffmpeg有一些字体编码的
+问题，这里是使用了Ubuntu作为容器，同时将宿主机的字体文件夹挂载到容器中，因此要求宿主机
+也是Ubuntu，不过用户应该可以根据自己的情况去改动挂载的路径。
 
 `sorry客户真的可以为所欲为`样例：
 
