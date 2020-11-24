@@ -28,7 +28,7 @@ def calculate_hash(src):
     res = m2.hexdigest()
     print(res)
     if redisConnection:
-        redisConnection.set(src,res)
+        redisConnection.set(src,res,ex = 3600) # 设置一个小时缓存，足够了
     return res
 
 
