@@ -6,11 +6,30 @@ from subprocess import Popen, PIPE
 
 from jinja2 import Template
 
+import redis
+
+import config
+
+try:
+    redisConnection = redis.Redis(config.REDISHOST,config.REDISPORT,config.REDISDB)
+    print("success to connect redis")
+except Exception as e:
+    print(e)
+    redisConnection = None
 
 def calculate_hash(src):
+    src = str(src)
+    if redisConnection:
+        res = redisConnection.get(src)
+        if res:
+            return str(res)
     m2 = hashlib.md5()
-    m2.update(str(src).encode("utf8"))
-    return m2.hexdigest()
+    m2.update(src.encode("utf8"))
+    res = m2.hexdigest()
+    print(res)
+    if redisConnection:
+        redisConnection.set(src,res,ex = 3600) # 设置一个小时缓存，足够了
+    return res
 
 
 def render_gif(template_name, sentences):

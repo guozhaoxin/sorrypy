@@ -5,6 +5,8 @@ import json
 from flask import Flask
 from flask import redirect, render_template, request
 
+import render
+
 app = Flask(__name__)
 
 
@@ -30,7 +32,6 @@ def tplmake(name="sorry"):
             sentences[int(k)] = v
 
         app.logger.debug(json.dumps(sentences, ensure_ascii=False))
-        import render
         path = render.render_gif(name, sentences)
         app.logger.debug(path)
         return '<p><a href="/{path}" target="_blank"><p>点击下载</p></a></p>'.format(path=path)
